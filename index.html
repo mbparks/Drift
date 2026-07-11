@@ -1,0 +1,117 @@
+<!-- Drift v7.4.0 Portfolio Learning -->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Drift v7.4.0 — Field Instrument 078</title>
+<link href="css/base.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="#mainContent">Skip to main content</a>
+<div id="driftLiveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><div class="eyebrow">Field Instrument 078</div><h1>Drift</h1><p>Observation and Improvement Instrument</p><span class="version">v7.4.0 Portfolio Learning</span></div>
+<button aria-label="Collapse navigation" class="btn sidebar-toggle" id="sidebarToggle" type="button">☰ Collapse Navigation</button>
+<nav class="nav">
+<div class="nav-label">Work</div>
+<button class="active" data-view="dashboard">Dashboard</button>
+<button data-view="inquiries">Inquiries</button>
+<button data-view="fieldwork">Fieldwork</button>
+<div class="nav-label">Libraries</div>
+<button data-view="evidence">Evidence</button>
+<button data-view="stations">Stations</button>
+<button data-view="patterns">Patterns</button>
+<button data-view="assistant">Reasoning Assistant</button>
+<button data-view="copilot">Guided Copilot</button>
+<button data-view="discovery">Pattern Discovery</button>
+<button data-view="quality">Reasoning Quality</button>
+<button data-view="learning">Portfolio Learning</button>
+<div class="nav-label">Assurance</div>
+<button data-view="control">Control Center</button>
+<button data-view="search">Search</button>
+<button data-view="reports">Reports</button>
+<div class="nav-label">System</div>
+<button data-view="templates">Templates</button>
+<button data-view="archive">Archive</button>
+<button data-view="settings">Settings</button>
+<button data-view="diagnostics">Diagnostics</button>
+</nav>
+<div class="side-actions">
+<button id="newInquiryBtn">＋ New Inquiry</button>
+<button id="loadDemoBtn">Load Demo</button>
+<button id="exportBtn">Export JSON</button>
+<button id="importBtn">Import JSON</button>
+<input accept=".json" hidden="" id="importFile" type="file"/>
+<button id="themeBtn">Toggle Dark Mode</button>
+</div>
+</aside>
+<main class="main" id="mainContent" tabindex="-1">
+<div class="topbar"><div><h2 id="viewTitle">Dashboard</h2><div class="status" id="saveStatus">Saved locally</div></div><div class="toolbar"><button class="btn primary" id="quickCaptureBtn">Quick Capture</button></div></div>
+<div class="content">
+<section class="workspace active" id="dashboardView"></section>
+<section class="workspace" id="inquiriesView"></section>
+<section class="workspace" id="fieldworkView"></section>
+<section class="workspace" id="evidenceView"></section>
+<section class="workspace" id="stationsView"></section>
+<section class="workspace" id="patternsView"></section>
+<section class="workspace" id="assistantView"></section>
+<section class="workspace" id="copilotView"></section>
+<section class="workspace" id="discoveryView"></section>
+<section class="workspace" id="qualityView"></section>
+<section class="workspace" id="learningView"></section>
+<section class="workspace" id="controlView"></section>
+<section class="workspace" id="searchView"></section>
+<section class="workspace" id="templatesView"></section>
+<section class="workspace" id="reportsView"></section>
+<section class="workspace" id="archiveView"></section>
+<section class="workspace" id="settingsView"></section>
+<section class="workspace" id="diagnosticsView"></section>
+<section class="workspace" id="inquiryWorkspace"></section>
+</div>
+</main>
+</div>
+<dialog id="inquiryDialog"><form id="inquiryForm">
+<h3 id="inquiryDialogTitle">New Inquiry</h3><input id="inqId" type="hidden"/>
+<div class="form-grid">
+<label>Inquiry title<input id="inqTitle" required=""/></label><label>Subject<input id="inqSubject"/></label>
+<label style="grid-column:1/-1">Guiding question<textarea id="inqQuestion" required=""></textarea></label>
+<label>Location<input id="inqLocation"/></label><label>Owner<input id="inqOwner"/></label>
+<label>Desired outcome<textarea id="inqOutcome"></textarea></label><label>Baseline condition<textarea id="inqBaseline"></textarea></label>
+</div><div class="dialog-actions"><button class="btn" data-close="inquiryDialog" type="button">Cancel</button><button class="btn primary">Save Inquiry</button></div>
+</form></dialog>
+<dialog id="recordDialog"><form id="recordForm">
+<h3 id="recordDialogTitle">Add Record</h3><input id="recordType" type="hidden"/><div id="recordFields"></div>
+<div class="dialog-actions"><button class="btn" data-close="recordDialog" type="button">Cancel</button><button class="btn primary">Save Record</button></div>
+</form></dialog>
+<script defer="" src="js/app-core.js"></script>
+<link href="css/components.css" rel="stylesheet"/>
+<script defer="" src="js/analysis-reporting.js"></script>
+<script defer="" src="js/governance-integrity.js"></script>
+<script defer src="js/diagnostics-foundation.js"></script>
+
+<link href="css/analysis.css" rel="stylesheet"/>
+<script defer="" src="js/workflow.js"></script>
+<link href="css/workflow-inspector.css" rel="stylesheet"/>
+<script defer="" src="js/record-inspector.js"></script>
+<link href="css/report-studio.css" rel="stylesheet"/>
+<script defer src="js/report-studio.js"></script>
+<link href="css/performance.css" rel="stylesheet"/>
+<script defer src="js/performance-scale.js"></script>
+<link href="css/hardening.css" rel="stylesheet"/>
+<link href="css/assisted-reasoning.css" rel="stylesheet"/>
+<link href="css/guided-copilot.css" rel="stylesheet"/>
+<link href="css/advanced-patterns.css" rel="stylesheet"/>
+<link href="css/reasoning-quality.css" rel="stylesheet"/>
+<link href="css/portfolio-learning.css" rel="stylesheet"/>
+<script defer src="js/release-hardening.js"></script>
+<script defer src="js/assisted-reasoning.js"></script>
+<script defer src="js/guided-copilot.js"></script>
+<script defer src="js/advanced-patterns.js"></script>
+<script defer src="js/reasoning-quality.js"></script>
+<script defer src="js/portfolio-learning.js"></script>
+<script defer src="js/bootstrap.js"></script>
+</body>
+</html>

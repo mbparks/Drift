@@ -1,0 +1,15 @@
+/* Drift v6.5 Release Hardening */
+.skip-link{position:fixed;left:12px;top:-60px;z-index:10000;padding:10px 14px;border-radius:9px;background:var(--text);color:var(--panel);font-weight:800;transition:top .15s}.skip-link:focus{top:12px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+:focus-visible{outline:3px solid var(--accent2);outline-offset:3px}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent2) 22%,transparent)}
+[aria-invalid="true"]{border-color:var(--danger)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 18%,transparent)}
+.field-error{font-size:.76rem;color:var(--danger);font-weight:700}
+.hardening-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.hardening-card{padding:14px;border:1px solid var(--line);border-radius:13px;background:var(--panel2)}.hardening-card strong{font-size:1.35rem;display:block;margin-top:5px}
+.recovery-row,.regression-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.recovery-row:last-child,.regression-row:last-child{border-bottom:0}
+.test-status{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;font-weight:900}.test-status.pass{background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good)}.test-status.fail{background:color-mix(in srgb,var(--danger) 20%,transparent);color:var(--danger)}
+.keyboard-help kbd{display:inline-block;min-width:28px;text-align:center;padding:3px 7px;border:1px solid var(--line);border-bottom-width:3px;border-radius:6px;background:var(--panel);font:700 .78rem ui-monospace,monospace}
+.toast{position:fixed;right:20px;bottom:20px;z-index:10000;max-width:min(390px,calc(100vw - 40px));padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);animation:toast-in .18s ease-out}.toast.error{border-color:var(--danger)}@keyframes toast-in{from{transform:translateY(12px);opacity:0}}
+@media(max-width:760px){.hardening-grid{grid-template-columns:1fr 1fr}.topbar{position:sticky}.btn,.nav button{min-height:44px}dialog{max-height:92dvh;overflow:auto}.recovery-row,.regression-row{grid-template-columns:auto 1fr}.recovery-row .toolbar,.regression-row .toolbar{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{.skip-link,#driftLiveRegion,.toast{display:none!important}}

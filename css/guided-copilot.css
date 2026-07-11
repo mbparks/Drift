@@ -1,0 +1,24 @@
+/* Drift v7.1.0 Guided Inquiry Copilot */
+.copilot-hero{display:grid;grid-template-columns:1.5fr .9fr;gap:18px;margin-bottom:18px}
+.copilot-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.copilot-stage{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.copilot-stage span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--panel2);font-size:.78rem;font-weight:750}
+.copilot-stage span.current{background:var(--accent);border-color:var(--accent);color:#fff}
+.copilot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.copilot-card{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.copilot-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent)}
+.copilot-card.high::before{background:var(--danger)}
+.copilot-card.medium::before{background:var(--warn)}
+.copilot-card.low::before{background:var(--accent)}
+.copilot-card h4{margin:.35rem 0 .5rem;font-size:1.05rem}
+.copilot-card p{margin:.35rem 0;color:var(--muted)}
+.copilot-rationale{margin-top:12px;padding:11px;border-radius:11px;background:var(--panel2);font-size:.84rem}
+.copilot-trigger-list{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.copilot-trigger{border:1px solid var(--line);background:var(--panel2);border-radius:999px;padding:5px 8px;font-size:.72rem}
+.copilot-confidence{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;margin-top:12px;font-size:.75rem;color:var(--muted)}
+.copilot-confidence .bar{height:8px}
+.copilot-benefit{font-size:.8rem;font-weight:750;color:var(--accent);margin-top:9px}
+.copilot-empty{padding:36px;text-align:center;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
+.copilot-filter{display:flex;gap:8px;flex-wrap:wrap}
+.copilot-filter button.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media(max-width:900px){.copilot-hero,.copilot-grid{grid-template-columns:1fr}}
