@@ -13,3 +13,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(max-width:760px){.hardening-grid{grid-template-columns:1fr 1fr}.topbar{position:sticky}.btn,.nav button{min-height:44px}dialog{max-height:92dvh;overflow:auto}.recovery-row,.regression-row{grid-template-columns:auto 1fr}.recovery-row .toolbar,.regression-row .toolbar{grid-column:1/-1}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 @media print{.skip-link,#driftLiveRegion,.toast{display:none!important}}
+
+.runtime-failure{max-width:760px;margin:30px auto;border-left:5px solid var(--danger)}
+.record-open-button{width:100%;text-align:left;color:var(--text);cursor:pointer;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+.record-open-button:hover{border-color:var(--accent);transform:translateY(-1px)}

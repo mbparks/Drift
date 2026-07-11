@@ -1,4 +1,4 @@
-const APP_VERSION="7.4.0", STORAGE_KEY="drift-fi078-v5";
+const APP_VERSION="7.4.1", STORAGE_KEY="drift-fi078-v5";
 const blankState=()=>({version:APP_VERSION,theme:"light",inquiries:[],auditLog:[],backupHistory:[],updatedAt:null});
 let state=loadState(), currentView="dashboard", currentInquiryId=null, currentTab="overview", compareSelection=[];
 
@@ -146,6 +146,28 @@ function renderInquiry(){
  const tabs=[["overview","Overview"],["reasoning","Reasoning"],["timeline","Timeline"],["graph","Graph"],["observe","Observe"],["evidence","Evidence"],["stations","Stations"],["compare","Compare"],["changes","Changes"],["diagnose","Diagnose"],["causes","Root Causes"],["interventions","Interventions"],["actions","Actions"],["backlog","Backlog"],["governance","Governance"],["verification","Verification"],["stakeholders","Stakeholders"],["guides","Interview Guides"],["listen","Perspectives"],["coding","Themes"],["consensus","Consensus"],["predict","Predictions"],["assumptions","Assumptions"],["calibration","Calibration"],["experiments","Experiments"],["review","Review"]];
  inquiryWorkspace.innerHTML=`<div class="inquiry-header"><div><div class="eyebrow">${esc(i.subject||"Inquiry")}</div><h2>${esc(i.title)}</h2><p>${esc(i.question)}</p></div><div class="toolbar"><button class="btn" onclick="window.print()">Print / Save PDF</button><button class="btn" onclick="toggleArchive('${i.id}')">${i.archived?"Restore":"Archive"}</button></div></div><div class="card" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between"><strong>Inquiry health</strong><span>${health(i)}%</span></div><div class="health" style="margin-top:8px"><span style="width:${health(i)}%"></span></div></div><div class="tabs">${tabs.map(([k,n])=>`<button class="${currentTab===k?"active":""}" onclick="setTab('${k}')">${n}</button>`).join("")}</div><div class="tab-panel active">${renderInquiryTab(currentTab,i)}</div>`;
 }
+function renderOverview(i){
+ const counts={
+  observations:(i.observations||[]).length,
+  evidence:(i.evidence||[]).length,
+  friction:(i.frictions||[]).length,
+  causes:(i.rootCauses||[]).length,
+  interventions:(i.interventions||[]).length,
+  actions:(i.actions||[]).length,
+  perspectives:(i.perspectives||[]).length,
+  forecasts:(i.forecasts||[]).length,
+  reviews:(i.reviews||[]).length,
+  lessons:(i.lessons||[]).length
+ };
+ const recent=all(i).filter(x=>x.record&&x.record.id).sort((a,b)=>String(b.record.updatedAt||b.record.createdAt||'').localeCompare(String(a.record.updatedAt||a.record.createdAt||''))).slice(0,6);
+ const openActions=(i.actions||[]).filter(x=>!['Done','Closed','Complete','Completed'].includes(x.status)).length;
+ const overdueForecasts=(i.forecasts||[]).filter(x=>x.targetDate&&new Date(x.targetDate)<new Date()&&!['Resolved','Cancelled'].includes(x.status)).length;
+ return `<div class="grid cards">${metric('Observations',counts.observations)}${metric('Evidence',counts.evidence)}${metric('Friction',counts.friction)}${metric('Interventions',counts.interventions)}</div>
+ <div class="split" style="margin-top:18px"><div class="card"><div class="eyebrow">Inquiry frame</div><h3>${esc(i.title)}</h3><p><strong>Guiding question</strong><br>${esc(i.question||'Not defined')}</p><p><strong>Baseline</strong><br>${esc(i.baseline||'Not defined')}</p><p><strong>Desired outcome</strong><br>${esc(i.outcome||'Not defined')}</p><div class="badges"><span class="badge">${esc(i.owner||'No owner')}</span><span class="badge">${esc(i.location||'No location')}</span></div></div>
+ <div class="card"><div class="eyebrow">Attention</div><h3>What needs work</h3><div class="notice">${openActions} open action${openActions===1?'':'s'}.</div><div class="notice" style="margin-top:10px">${overdueForecasts} overdue forecast${overdueForecasts===1?'':'s'} awaiting resolution.</div><div class="progress-list" style="margin-top:14px">${Object.entries(counts).map(([k,v])=>`<div class="progress-row"><span>${esc(k)}</span><div class="bar"><span style="width:${Math.min(v,5)*20}%"></span></div><strong>${v}</strong></div>`).join('')}</div></div></div>
+ <div class="card" style="margin-top:18px"><div class="section-head" style="margin:0 0 12px"><div><h3>Recent inquiry activity</h3><p class="status">The most recently created or updated records.</p></div></div>${recent.length?`<div class="item-list">${recent.map(x=>`<button class="item record-open-button" onclick="openRecordInspector('${i.id}','${x.type}','${x.record.id}')"><span class="badge">${esc(x.type)}</span><strong>${esc(recordLabel(x.record))}</strong><span class="status">${esc(new Date(x.record.updatedAt||x.record.createdAt).toLocaleString())}</span></button>`).join('')}</div>`:'<div class="empty">No inquiry records have been created yet.</div>'}</div>`;
+}
+
 function renderInquiryTab(t,i){
  if(t==="overview")return renderOverview(i);
  if(t==="reasoning")return renderReasoning(i);

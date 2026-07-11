@@ -1,4 +1,4 @@
-# Drift v7.4.0 — Portfolio Learning
+# Drift v7.4.1 — Portfolio Learning
 
 Drift is a local-first field inquiry platform for observing change, diagnosing friction, preserving perspectives, testing predictions, verifying interventions, and carrying lessons forward.
 
