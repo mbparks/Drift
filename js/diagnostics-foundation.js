@@ -42,7 +42,7 @@ renderOverview=function(i){return v6OriginalOverview(i)+`<div style="margin-top:
 function runDiagnostics(){
  const results=[];const test=(name,fn,group='Core')=>{try{const detail=fn();results.push({name,group,pass:true,detail:detail===true?'Passed':String(detail||'Passed')})}catch(e){results.push({name,group,pass:false,detail:e.message})}};
  const integrity=DriftCore.integrity();
- test('Application version',()=>APP_VERSION==='7.4.1'||(()=>{throw Error('Unexpected version '+APP_VERSION)})(),'Runtime');
+ test('Application version',()=>APP_VERSION==='7.4.2'||(()=>{throw Error('Unexpected version '+APP_VERSION)})(),'Runtime');
  test('Overview renderer',()=>typeof renderOverview==='function'||(()=>{throw Error('renderOverview unavailable')})(),'Integration');
  test('Inquiry route integration',()=>{const r=typeof runInquiryRouteTestV741==='function'?runInquiryRouteTestV741():{pass:false,detail:'Route test unavailable'};if(!r.pass)throw Error(r.detail);return r.detail},'Integration');
  test('State serializes',()=>JSON.stringify(state).length+' bytes','Storage');

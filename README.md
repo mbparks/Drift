@@ -1,4 +1,4 @@
-# Drift v7.4.1 — Portfolio Learning
+# Drift v7.4.2 — Runtime Stability
 
 Drift is a local-first field inquiry platform for observing change, diagnosing friction, preserving perspectives, testing predictions, verifying interventions, and carrying lessons forward.
 
@@ -20,3 +20,8 @@ All analysis is deterministic, local, and user-controlled. Repetition is present
 ## Run
 
 Serve the folder from any static web server and open `index.html`. All application data remains in browser storage unless explicitly exported.
+
+
+## v7.4.2 runtime correction
+
+This patch fixes the `all is not defined` inquiry overview failure by moving inquiry record aggregation into `app-core.js`. It also corrects recent-activity record links to call the actual v6.2 record inspector entry point and expands the Open Inquiry integration test to verify both dependencies.

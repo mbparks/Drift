@@ -1,4 +1,4 @@
-// Drift v7.4.1 Integration & Runtime Stability
+// Drift v7.4.2 Integration & Runtime Stability
 (function(){
   const originalRender=window.render;
   const originalOpenInquiry=window.openInquiry;
@@ -41,6 +41,8 @@
     if(typeof window.openInquiry!=='function')return {name:result.name,pass:false,detail:'openInquiry is unavailable.'};
     if(typeof window.renderOverview!=='function')return {name:result.name,pass:false,detail:'renderOverview is unavailable.'};
     if(typeof window.renderInquiry!=='function')return {name:result.name,pass:false,detail:'renderInquiry is unavailable.'};
+    if(typeof window.inquiryRecords!=='function')return {name:result.name,pass:false,detail:'Core inquiry record aggregation is unavailable.'};
+    if(typeof window.inspectRecordV62!=='function')return {name:result.name,pass:false,detail:'Record inspector navigation is unavailable.'};
     if(!inquiry)return result;
     const previous={view:currentView,id:currentInquiryId,tab:currentTab,stage:typeof currentWorkflowStageV61==='undefined'?undefined:currentWorkflowStageV61};
     const target=document.getElementById('inquiryWorkspace');

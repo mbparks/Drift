@@ -1,4 +1,4 @@
-// Drift v7.4.1 Reasoning Quality
+// Drift v7.4.2 Reasoning Quality
 (function(){
 const DIMS=[
  {id:'evidence',label:'Evidence sufficiency',weight:16},

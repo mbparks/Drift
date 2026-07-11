@@ -1,4 +1,4 @@
-const APP_VERSION="7.4.1", STORAGE_KEY="drift-fi078-v5";
+const APP_VERSION="7.4.2", STORAGE_KEY="drift-fi078-v5";
 const blankState=()=>({version:APP_VERSION,theme:"light",inquiries:[],auditLog:[],backupHistory:[],updatedAt:null});
 let state=loadState(), currentView="dashboard", currentInquiryId=null, currentTab="overview", compareSelection=[];
 
@@ -16,6 +16,8 @@ function stageCounts(i){return {observe:(i.observations||[]).length,diagnose:(i.
 function health(i){const c=stageCounts(i),vals=Object.values(c).map(v=>Math.min(v,2)/2);return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length*100)}
 function metric(label,value){return `<div class="card metric"><div class="label">${label}</div><div class="value">${value}</div></div>`}
 function recordLabel(n){return n.title||n.name||n.problem||n.prediction||n.participant||n.inference||n.hypothesis||n.lesson||n.action||"Record"}
+const CORE_RECORD_COLLECTIONS={observations:"observation",evidence:"evidence",stations:"station",changes:"change",frictions:"friction",rootCauses:"cause",interventions:"intervention",interventionEvents:"interventionEvent",actions:"action",stakeholders:"stakeholder",interviewGuides:"guide",perspectives:"perspective",codes:"code",forecasts:"forecast",assumptions:"assumption",experiments:"experiment",inferences:"inference",hypotheses:"hypothesis",lessons:"lesson",reviews:"review"};
+function inquiryRecords(i){return Object.entries(CORE_RECORD_COLLECTIONS).flatMap(([array,type])=>(i[array]||[]).map(record=>({array,type,record})));}
 
 function render(){
  document.querySelectorAll(".workspace").forEach(x=>x.classList.remove("active"));
@@ -159,13 +161,13 @@ function renderOverview(i){
   reviews:(i.reviews||[]).length,
   lessons:(i.lessons||[]).length
  };
- const recent=all(i).filter(x=>x.record&&x.record.id).sort((a,b)=>String(b.record.updatedAt||b.record.createdAt||'').localeCompare(String(a.record.updatedAt||a.record.createdAt||''))).slice(0,6);
+ const recent=inquiryRecords(i).filter(x=>x.record&&x.record.id).sort((a,b)=>String(b.record.updatedAt||b.record.createdAt||'').localeCompare(String(a.record.updatedAt||a.record.createdAt||''))).slice(0,6);
  const openActions=(i.actions||[]).filter(x=>!['Done','Closed','Complete','Completed'].includes(x.status)).length;
  const overdueForecasts=(i.forecasts||[]).filter(x=>x.targetDate&&new Date(x.targetDate)<new Date()&&!['Resolved','Cancelled'].includes(x.status)).length;
  return `<div class="grid cards">${metric('Observations',counts.observations)}${metric('Evidence',counts.evidence)}${metric('Friction',counts.friction)}${metric('Interventions',counts.interventions)}</div>
  <div class="split" style="margin-top:18px"><div class="card"><div class="eyebrow">Inquiry frame</div><h3>${esc(i.title)}</h3><p><strong>Guiding question</strong><br>${esc(i.question||'Not defined')}</p><p><strong>Baseline</strong><br>${esc(i.baseline||'Not defined')}</p><p><strong>Desired outcome</strong><br>${esc(i.outcome||'Not defined')}</p><div class="badges"><span class="badge">${esc(i.owner||'No owner')}</span><span class="badge">${esc(i.location||'No location')}</span></div></div>
  <div class="card"><div class="eyebrow">Attention</div><h3>What needs work</h3><div class="notice">${openActions} open action${openActions===1?'':'s'}.</div><div class="notice" style="margin-top:10px">${overdueForecasts} overdue forecast${overdueForecasts===1?'':'s'} awaiting resolution.</div><div class="progress-list" style="margin-top:14px">${Object.entries(counts).map(([k,v])=>`<div class="progress-row"><span>${esc(k)}</span><div class="bar"><span style="width:${Math.min(v,5)*20}%"></span></div><strong>${v}</strong></div>`).join('')}</div></div></div>
- <div class="card" style="margin-top:18px"><div class="section-head" style="margin:0 0 12px"><div><h3>Recent inquiry activity</h3><p class="status">The most recently created or updated records.</p></div></div>${recent.length?`<div class="item-list">${recent.map(x=>`<button class="item record-open-button" onclick="openRecordInspector('${i.id}','${x.type}','${x.record.id}')"><span class="badge">${esc(x.type)}</span><strong>${esc(recordLabel(x.record))}</strong><span class="status">${esc(new Date(x.record.updatedAt||x.record.createdAt).toLocaleString())}</span></button>`).join('')}</div>`:'<div class="empty">No inquiry records have been created yet.</div>'}</div>`;
+ <div class="card" style="margin-top:18px"><div class="section-head" style="margin:0 0 12px"><div><h3>Recent inquiry activity</h3><p class="status">The most recently created or updated records.</p></div></div>${recent.length?`<div class="item-list">${recent.map(x=>`<button class="item record-open-button" onclick="inspectRecordV62('${x.record.id}','${x.type}','${i.id}')"><span class="badge">${esc(x.type)}</span><strong>${esc(recordLabel(x.record))}</strong><span class="status">${esc(new Date(x.record.updatedAt||x.record.createdAt).toLocaleString())}</span></button>`).join('')}</div>`:'<div class="empty">No inquiry records have been created yet.</div>'}</div>`;
 }
 
 function renderInquiryTab(t,i){
